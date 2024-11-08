@@ -4,6 +4,7 @@
 # from PIL import ImageFont, ImageDraw, Image
 # from pyA20.gpio import gpio
 # from pyA20.gpio import port
+
 import time
 from time import sleep
 import os
