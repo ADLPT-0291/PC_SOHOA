@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-from oled.device import ssd1306, sh1106
-from oled.render import canvas
-from PIL import ImageFont, ImageDraw, Image
-from pyA20.gpio import gpio
-from pyA20.gpio import port
+# from oled.device import ssd1306, sh1106
+# from oled.render import canvas
+# from PIL import ImageFont, ImageDraw, Image
+# from pyA20.gpio import gpio
+# from pyA20.gpio import port
 import time
 from time import sleep
 import os
@@ -50,7 +50,7 @@ volume = 50
 step = 5
 # Tạo terminal ảo và chạy darkice trong đó
 
-#kich_nguon_sac = 16 # chan 18
+kich_nguon_sac = 16 # chan 18
 gpio.setcfg(led_status, gpio.OUTPUT)
 gpio.setcfg(watchdog, gpio.OUTPUT)
 gpio.setcfg(led_connect, gpio.OUTPUT)
@@ -316,65 +316,65 @@ def api_xacnhanketnoi(data):
 #############################################################
 
 ############ ham gui nhat ky ban tin ve tinh ################
-def api_nhatkybantinTinh(data):
-  global Status, Video
-  Status = "true"     
-  #gui nhat ky ban tin ve tinh#
-  volume = subprocess.check_output("mpc volume", shell=True ).decode("utf-8")
-  volume = volume[8:]
-  volume = volume[:-1]
-  seconds = time.time()
-  dataLichsuApi = {
-    'Imei': imel,
-    'DeviceName': tenthietbi,
-    'Provider': data['Provider'],
-    'MediaId': data['MediaId'],
-    'SourceId': data['SourceId'],
-    'SourceName': data['SourceName'],
-    'DestinationId': data['DestinationId'],
-    'DestinationName': data['DestinationName'],
-    'Title': data['Title'],
-    'Description': "",
-    'Body': data['Body'],
-    'IsExternal': int(data['IsExternal']) ,
-    'ExternalSource': data['ExternalSource'],
-    'Volume': volume[:-1],
-    'PAState': "",
-    'Priority': {
-      'id': int(data['Priority']['id']),
-      'value': data['Priority']['value']
-    },
-    'Category': {
-      'id': int(data['Category']['id']) ,
-      'value': data['Category']['value']
-    },
-    'ContentType': { 
-      'id': 3, 
-      'value': data['ContentType']['value'] },
-    'Author': {
-      'id': data['Author']['id'],
-      'Fullname': data['Author']['Fullname'],
-      'Username': data['Author']['Username'],
-      'Avatar': data['Author']['Avatar'],
-      'Email': data['Author']['Email']
-    },
-    'StartTime': int(seconds),
-    'CreateDate': int(data['CreateDate']),
-    'Duration': data['Duration']
-  }
-  try:
-    responseLogbantinTinh = requests.post(domainLoginTinh, json = {'Username':userName, 'Password':password}, headers={'Content-Type': "application/json", 'Accept': "application/json"})
-    datajsonResponseLog = responseLogbantinTinh.json()
-    if(datajsonResponseLog['Message'] == 'Success'): 
-      headers = {'Authorization': "Bearer {}".format(datajsonResponseLog["Token"])}
-      responseLog = requests.post(domainLogTinh, json = dataLichsuApi, headers=headers, timeout=5)
-    # responseLog = requests.post(domainLogTinh, json = dataLichsuApi)
-  except:
-    print('loi gui log ban tin ve tinh')
-#############################################################  
+# def api_nhatkybantinTinh(data):
+#   global Status, Video
+#   Status = "true"     
+#   #gui nhat ky ban tin ve tinh#
+#   volume = subprocess.check_output("mpc volume", shell=True ).decode("utf-8")
+#   volume = volume[8:]
+#   volume = volume[:-1]
+#   seconds = time.time()
+#   dataLichsuApi = {
+#     'Imei': imel,
+#     'DeviceName': tenthietbi,
+#     'Provider': data['Provider'],
+#     'MediaId': data['MediaId'],
+#     'SourceId': data['SourceId'],
+#     'SourceName': data['SourceName'],
+#     'DestinationId': data['DestinationId'],
+#     'DestinationName': data['DestinationName'],
+#     'Title': data['Title'],
+#     'Description': "",
+#     'Body': data['Body'],
+#     'IsExternal': int(data['IsExternal']) ,
+#     'ExternalSource': data['ExternalSource'],
+#     'Volume': volume[:-1],
+#     'PAState': "",
+#     'Priority': {
+#       'id': int(data['Priority']['id']),
+#       'value': data['Priority']['value']
+#     },
+#     'Category': {
+#       'id': int(data['Category']['id']) ,
+#       'value': data['Category']['value']
+#     },
+#     'ContentType': { 
+#       'id': 3, 
+#       'value': data['ContentType']['value'] },
+#     'Author': {
+#       'id': data['Author']['id'],
+#       'Fullname': data['Author']['Fullname'],
+#       'Username': data['Author']['Username'],
+#       'Avatar': data['Author']['Avatar'],
+#       'Email': data['Author']['Email']
+#     },
+#     'StartTime': int(seconds),
+#     'CreateDate': int(data['CreateDate']),
+#     'Duration': data['Duration']
+#   }
+#   try:
+#     responseLogbantinTinh = requests.post(domainLoginTinh, json = {'Username':userName, 'Password':password}, headers={'Content-Type': "application/json", 'Accept': "application/json"})
+#     datajsonResponseLog = responseLogbantinTinh.json()
+#     if(datajsonResponseLog['Message'] == 'Success'): 
+#       headers = {'Authorization': "Bearer {}".format(datajsonResponseLog["Token"])}
+#       responseLog = requests.post(domainLogTinh, json = dataLichsuApi, headers=headers, timeout=5)
+#     # responseLog = requests.post(domainLogTinh, json = dataLichsuApi)
+#   except:
+#     print('loi gui log ban tin ve tinh')
+# #############################################################  
 
-############# ping data ve tinh 30s #########################
-def pingTinh():
+# ############# ping data ve tinh 30s #########################
+# def pingTinh():
   global trangthaiguiApi, userName, password, domainLoginTinh, domainPingTinh, domainLogTinh, imel, tenthietbi, madiaban, tendiaban, lat, lng, Status, Video, khoaguidulieu
   # test
   if not khoaguidulieu:
