@@ -1022,7 +1022,7 @@ callApipingServer = RepeatedTimer(20, pingServer)
 # pingApiTinh = RepeatedTimer(30, pingTinh)
 # watchdog_start = RepeatedTimer(1, watchdogStart)
 # nhapnhay_wifi = RepeatedTimer(0.15, led_nhapnhaywifi)
-nhapnhay_wifi.stop()
+# nhapnhay_wifi.stop()
 # speedtest_start = RepeatedTimer(60, get_speedtest)
 #pwmLed = RepeatedTimer(1, pwm_led)
 run_main=False
