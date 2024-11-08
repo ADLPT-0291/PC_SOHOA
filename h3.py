@@ -1106,12 +1106,12 @@ while run_flag:
             if elapsed_time >= 5:
               if wifi == True:
                 nhapnhatLedConnectCallApiloi.stop()
-                nhapnhay_wifi.start()               
+                # nhapnhay_wifi.start()               
                 os.system("sudo systemctl start myappserver.service")
                 os.system("sudo systemctl start nginx")
                 os.system("sudo service hostapd start") 
               if wifi == False:
-                nhapnhay_wifi.stop()
+                # nhapnhay_wifi.stop()
                 # gpio.output(led_connect,1)              
                 os.system("sudo systemctl stop myappserver.service")
                 os.system("sudo systemctl stop nginx")
