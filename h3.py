@@ -540,15 +540,15 @@ def pingServer():
           stop_darkice()
         loiketnoi +=1
     demLoicallApiPing = 0
-    nhapnhatLedConnectCallApiloi.stop()
+    # nhapnhatLedConnectCallApiloi.stop()
     # gpio.output(led_connect,1) 
    
   except:
     if demLoicallApiPing < 40:
       demLoicallApiPing+=1
     if demLoicallApiPing == 1:
-      nhapnhatLedConnect.stop()
-      nhapnhatLedConnectCallApiloi.start()
+      # nhapnhatLedConnect.stop()
+      # nhapnhatLedConnectCallApiloi.start()
       countTime.stop()
       showStream.stop()
       last_start = False
