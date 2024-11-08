@@ -481,14 +481,14 @@ def pingServer():
     if playStream:
       if get_darkice_status_ping() == True:
         station_status = "play"
-        gpio.output(led_status,1)
+        # gpio.output(led_status,1)
         if not last_start and not last_set_volume:
           countTime.start()
           showStream.start()
           last_start = True
       else:
         station_status = "stop"
-        gpio.output(led_status,0)
+        # gpio.output(led_status,0)
         if last_start:
           countTime.stop()
           showStream.stop()
@@ -501,7 +501,7 @@ def pingServer():
           last_start = False
     else:
       station_status = "stop"
-      gpio.output(led_status,0)
+      # gpio.output(led_status,0)
       countTime.stop()
       showStream.stop()
       start_time_str = ''
@@ -541,7 +541,7 @@ def pingServer():
         loiketnoi +=1
     demLoicallApiPing = 0
     nhapnhatLedConnectCallApiloi.stop()
-    gpio.output(led_connect,1) 
+    # gpio.output(led_connect,1) 
    
   except:
     if demLoicallApiPing < 40:
@@ -597,14 +597,14 @@ def start_darkice():
       time.sleep(0.5) 
       countTime.start()
       client.publish(trangthaiplay,"play")
-      gpio.output(led_status,True)
+      # gpio.output(led_status,True)
 
 def stop_darkice():
     global last_start, playStream, trangthaiplay, led_status, second, minute, hour, start_time_str
     # stop darkice stream
     playStream = 0
     client.publish(trangthaiplay,"stop")
-    gpio.output(led_status,False)
+    # gpio.output(led_status,False)
     showStream.stop()
     countTime.stop()
     last_start = False
@@ -680,37 +680,37 @@ def kiemtraTrangthaiPlay():
 #############################################################
 
 ##############nhap nhay led phat wifi #######################
-def led_nhapnhaywifi():
-    global ledConnectStatus, demnhapnhay, demdung
-    if(demnhapnhay < 4):
-     gpio.output(led_connect,not ledConnectStatus)
-     ledConnectStatus = not ledConnectStatus
-     demnhapnhay+=1
-     demdung=0
-    if(demnhapnhay == 4):
-     demdung+=1
-    if(demdung == 16):
-     demnhapnhay=0
+# def led_nhapnhaywifi():
+#     global ledConnectStatus, demnhapnhay, demdung
+#     if(demnhapnhay < 4):
+#      gpio.output(led_connect,not ledConnectStatus)
+#      ledConnectStatus = not ledConnectStatus
+#      demnhapnhay+=1
+#      demdung=0
+#     if(demnhapnhay == 4):
+#      demdung+=1
+#     if(demdung == 16):
+#      demnhapnhay=0
 
 ############### Blinl led connect ###########################
-def ledConnectNhapnhay():
-    global ledConnectStatus
-    gpio.output(led_connect,not ledConnectStatus) 
-    ledConnectStatus = not ledConnectStatus
-#############################################################
+# def ledConnectNhapnhay():
+#     global ledConnectStatus
+#     gpio.output(led_connect,not ledConnectStatus) 
+#     ledConnectStatus = not ledConnectStatus
+# #############################################################
 
 ########## ham kich sung modul watchdog #####################
-def watchdogStart():
-  global watchdogStatus
-  gpio.output(watchdog,not watchdogStatus)
-  watchdogStatus = not watchdogStatus
+# def watchdogStart():
+#   global watchdogStatus
+#   gpio.output(watchdog,not watchdogStatus)
+#   watchdogStatus = not watchdogStatus
 ############################################################
 
 ###### led connect nhap nhay canh bao call Api loi #########
-def ledConnectNhapnhayLoiCallApi():
-    global ledConnectStatus
-    gpio.output(led_connect,not ledConnectStatus) 
-    ledConnectStatus = not ledConnectStatus
+# def ledConnectNhapnhayLoiCallApi():
+#     global ledConnectStatus
+#     gpio.output(led_connect,not ledConnectStatus) 
+#     ledConnectStatus = not ledConnectStatus
 ############################################################
 
 ###################### ham play ############################
@@ -742,7 +742,7 @@ def play(data):
     else:
       station_status = "play"     
     client.publish(trangthaiplay,station_status)
-    gpio.output(led_status,1)
+    # gpio.output(led_status,1)
    
     # gui log ban tin ve server #
     urldangphat = data['url']
@@ -806,7 +806,7 @@ def stop():
   try:
     os.system("mpc clear")
     os.system("mpc stop")          
-    gpio.output(led_status,0)
+    # gpio.output(led_status,0)
     kiemtraPlay = 0
     station = subprocess.check_output("mpc current", shell=True ).decode("utf-8")
     lines=station.split(":")
@@ -872,9 +872,9 @@ def setVolume(volume):
 ############ khoi dong lai modul 3g ########################
 def retartModul3g():
     global demRestartModul3g
-    gpio.output(kich_modul4g,0) 
+    # gpio.output(kich_modul4g,0) 
     time.sleep(5)
-    gpio.output(kich_modul4g,1) 
+    # gpio.output(kich_modul4g,1) 
     demRestartModul3g = 0
 ############################################################
 
@@ -902,7 +902,7 @@ def on_connect(client, userdata, flags, rc):
         client.connected_flag=True
         nhapnhatLedConnect.stop()
         nhapnhatLedConnectCallApiloi.stop()
-        gpio.output(led_connect,True) 
+        # gpio.output(led_connect,True) 
         show_ready()
         """ call API xac nhan ket noi """
        # ip = requests.get('https://api.ipify.org').text
@@ -1009,9 +1009,9 @@ client.on_connect=on_connect        #attach function to callback
 client.will_set("device/offline", payload=id, qos=1, retain=False)
 client.on_disconnect=on_disconnect
 client.on_message = on_message
-nhapnhatLedConnect = RepeatedTimer(1, ledConnectNhapnhay)
-nhapnhatLedConnectCallApiloi = RepeatedTimer(0.2, ledConnectNhapnhayLoiCallApi)
-nhapnhatLedConnectCallApiloi.stop()
+# nhapnhatLedConnect = RepeatedTimer(1, ledConnectNhapnhay)
+# nhapnhatLedConnectCallApiloi = RepeatedTimer(0.2, ledConnectNhapnhayLoiCallApi)
+# nhapnhatLedConnectCallApiloi.stop()
 countTime = RepeatedTimer(1, count_time)
 showStream = RepeatedTimer(1, show_stream)
 countVolume = RepeatedTimer(1, count_time_show_volume)
@@ -1019,9 +1019,9 @@ countVolume.stop()
 showStream.stop()
 countTime.stop()
 callApipingServer = RepeatedTimer(20, pingServer)
-pingApiTinh = RepeatedTimer(30, pingTinh)
-watchdog_start = RepeatedTimer(1, watchdogStart)
-nhapnhay_wifi = RepeatedTimer(0.15, led_nhapnhaywifi)
+# pingApiTinh = RepeatedTimer(30, pingTinh)
+# watchdog_start = RepeatedTimer(1, watchdogStart)
+# nhapnhay_wifi = RepeatedTimer(0.15, led_nhapnhaywifi)
 nhapnhay_wifi.stop()
 # speedtest_start = RepeatedTimer(60, get_speedtest)
 #pwmLed = RepeatedTimer(1, pwm_led)
@@ -1073,9 +1073,9 @@ while run_flag:
     while True:
       # output = p.readline().decode('utf-8')
       current_time = time.time()
-      current_on_off = gpio.input(on_off) # # Lấy trạng thái hiện tại của phím
-      current_up = gpio.input(up)
-      current_down = gpio.input(down)
+      # current_on_off = gpio.input(on_off) # # Lấy trạng thái hiện tại của phím
+      # current_up = gpio.input(up)
+      # current_down = gpio.input(down)
       # if current_on_off != prev_on_off and current_on_off:
       #   print('ok on_off')
       if time_show_volume == 7:
@@ -1091,12 +1091,12 @@ while run_flag:
           show_not_connect()
           last_set_volume = False
         time_show_volume = 0
-      if gpio.input(on_off):
-        if not pressed:
-            # Nếu phím được nhấn lần đầu tiên
-            pressed = True
-            start_time = current_time
-            wifi = not wifi
+      # if gpio.input(on_off):
+      #   if not pressed:
+      #       # Nếu phím được nhấn lần đầu tiên
+      #       pressed = True
+      #       start_time = current_time
+      #       wifi = not wifi
           
       else:
         if pressed:
@@ -1112,7 +1112,7 @@ while run_flag:
                 os.system("sudo service hostapd start") 
               if wifi == False:
                 nhapnhay_wifi.stop()
-                gpio.output(led_connect,1)              
+                # gpio.output(led_connect,1)              
                 os.system("sudo systemctl stop myappserver.service")
                 os.system("sudo systemctl stop nginx")
                 os.system("sudo service hostapd stop")
